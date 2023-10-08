@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "uuid": "^9.0.1"
+  },
+  "name": "crud-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "type": "module"
+}
