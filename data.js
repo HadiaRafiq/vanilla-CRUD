@@ -17,5 +17,6 @@ export const database = {
       enddatetime: new Date("2023-10-10T12:00:00.000Z"),
     },
   ],
+  attend: [],
 };
 

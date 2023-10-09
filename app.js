@@ -1,6 +1,7 @@
 import { createServer } from "http";
 
 import {
+  attendEvent,
   createEvent,
   createUser,
   deleteEvent,
@@ -51,6 +52,16 @@ const server = createServer(async (request, response) => {
         const newEvent = await createEvent(JSON.parse(event));
         response.writeHead(200, { "Content-Type": "application/json" });
         response.end(JSON.stringify(newEvent));
+      } catch (error) {
+        response.writeHead(400, { "Content-Type": "aplication/json" });
+        response.end(JSON.stringify({ error: `Bad Request ${error}` }));
+      }
+    } else if (url === "/attendEvent") {
+      try {
+        const attendanceInfo = await getRequestBody(request);
+        const attendance = await attendEvent(JSON.parse(attendanceInfo));
+        response.writeHead(200, { "Content-Type": "application/json" });
+        response.end(JSON.stringify(attendance));
       } catch (error) {
         response.writeHead(400, { "Content-Type": "aplication/json" });
         response.end(JSON.stringify({ error: `Bad Request ${error}` }));

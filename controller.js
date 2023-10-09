@@ -78,7 +78,6 @@ export const deleteEvent = (id) => {
     const removeIndex = events.findIndex((event) => event.id === id);
     if (removeIndex !== -1) {
       events.splice(removeIndex, 1);
-
       resolve(events);
     } else {
       reject("event not found");
@@ -89,5 +88,22 @@ export const getEvents = () => {
   const { events } = database;
   return new Promise((resolve, _) => {
     resolve(events);
+  });
+};
+export const attendEvent = (attendanceInfo) => {
+  const { attend, users, events } = database;
+  return new Promise((resolve, reject) => {
+    const userExists = users.findIndex(
+      (user) => user.id === attendanceInfo.userID
+    );
+    const eventExists = events.findIndex(
+      (event) => event.id === attendanceInfo.eventID
+    );
+    if (userExists !== -1 && eventExists !== -1) {
+      attend.push(attendanceInfo);
+      resolve(attendanceInfo);
+    } else {
+      reject(userExists === -1 ? "user not found" : "event not found");
+    }
   });
 };
